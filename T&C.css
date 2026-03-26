@@ -1,0 +1,447 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --gradient: linear-gradient(45deg, #00ffd5, #a800ce, #00fffb, #686de0);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --border: 1px solid rgba(255, 255, 255, 0.1);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+body {
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+/* Ensure the font is loaded */
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 5%;
+    background: #000000; /* Solid black background */
+    border-bottom: var(--border);
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow);
+}
+
+.navbar.scrolled {
+    padding: 0.8rem 5%;
+    background: #000000; /* Still solid black on scroll */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s linear infinite;
+    background-size: 300%;
+    letter-spacing: -0.5px;
+    color: #fffbfb;
+    margin-right: 20px;
+    margin-left: -60px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 75px;
+    margin-right: 10px;
+}
+
+/* Main navigation links */
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 1.2rem;
+    margin-left: auto; /* This pushes the links to the right */
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    font-size: 1.2rem; 
+    letter-spacing: 0.4px; 
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    background-size: 300%;
+    transition: width 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    background-size: 300%;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgb(0, 0, 0);
+}
+
+.nav-links a:hover::before,
+.nav-links a:hover::after {
+    width: 100%;
+    animation: gradient 8s linear infinite;
+}
+/* Custom style for the 'Vertex' link */
+.vertex-link {
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem; /* Adjust size as needed */
+    color: #00e7fc; /* Default text color */
+    text-decoration: none;
+    margin-left: 40px;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease; /* Smooth transition for text color */
+    margin-right: -60px;
+}
+.vertex-link .big-x {
+    font-size: 5rem; /* Makes the X bigger */
+    vertical-align: middle;
+    line-height: 1;
+    margin-top: 10px; /* Space between text and X */
+    font-family: "Monoton", sans-serif;
+    color: #ffffff;
+}
+
+/* Hover effect specifically for the 'Vertex' link */
+.vertex-link:hover {
+    color: transparent; /* Make text transparent so the gradient is visible */
+    background: linear-gradient(45deg, #a200ff, #00f2ff, #32cd32); /* Gradient effect */
+    background-size: 200% 200%; /* For animation effect */
+    -webkit-background-clip: text; /* Makes the background apply to text */
+    background-clip: text; /* Standard property for compatibility */
+    animation: gradient 1.5s ease-in-out infinite; /* Apply the gradient animation with infinite loop */
+}
+
+/* Keyframes for the gradient movement (applies only to 'Vertex') */
+@keyframes gradient {
+    0% {
+        background-position: 200% 0; /* Start the gradient from the right */
+    }
+    50% {
+        background-position: -200% 0; /* Move the gradient to the left */
+    }
+    100% {
+        background-position: 200% 0; /* End the gradient back at the right */
+    }
+}
+
+/* Mobile view styling */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh; /* Full height of the viewport */
+        width: 80%;
+        max-width: 400px;
+        background: linear-gradient(135deg, rgba(10, 10, 10, 0.99), rgba(20, 20, 20, 0.99));
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        padding: 2rem;
+        z-index: 1000; /* Ensure it appears above other content */
+    }
+
+    .nav-links.active {
+        right: 0; /* Slide the menu in */
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+/* Mobile view adjustments */
+    .vertex-link {
+
+        display: none;
+    }
+
+    .vertex-link .big-x {
+        display: none;
+    }
+/* Desktop styling */
+.logo {
+    font-size: 2.1rem;         /* Font size for desktop */
+    margin-left: -3mm;
+    display: flex;
+    margin-top: 10px;
+
+}
+.logo-img {
+
+    display: none;
+}
+
+}
+
+.mobile-nav-toggle {
+    display: none; /* Hidden by default — shown in media query */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    margin-top:20px
+  }
+  
+  .mobile-nav-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+
+/* Active state for mobile menu toggle */
+.mobile-nav-toggle.active .bar:nth-child(1) {
+    transform: translate(-50%, 5px) rotate(45deg);
+    width: 24px;
+}
+
+.mobile-nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active .bar:nth-child(3) {
+    transform: translate(-50%, -5px) rotate(-45deg);
+    width: 24px;
+}
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+      display: flex;
+    }
+  }
+/* Hide the link by default */
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .mobile-mobile-link {
+        text-decoration: none;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .mentry-text {
+        color: #00fffb;
+        font-size: 2.5rem;
+        font-family: "Monoton", sans-serif;
+    }
+
+    .big-x {
+        color: #ffffff;
+        font-size: 4.5rem;
+        font-family: "Monoton", sans-serif;
+        margin-left: 5px; /* Adjust if needed */
+        line-height: 1;
+    }
+
+    .mobile-mobile-link:hover {
+        text-decoration: underline;
+    }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 100px auto 20px auto; /* ⬅️ Added top margin (100px) */
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.979);
+}
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #000000;
+  }
+  
+  .update-date {
+    font-size: 0.9rem;
+    color: #000000ce;
+    margin-bottom: 30px;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #000000;
+  }
+  
+  p, li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    margin-left: 20px;
+    list-style-type: disc;
+  }
+  
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+  
+  a:hover {
+    color: #ff0000;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+  .footer {
+    position: fixed;
+    bottom: -100px;  /* Initially hidden below the viewport */
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 20px;
+    transition: bottom 0.3s ease;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  /* Center the content horizontally */
+    gap: 30px;  /* Space between items */
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(252, 252, 252);
+}
+
+.footer-content a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;  /* Underline links on hover */
+}
+
+/* Make footer visible when scrolled to the bottom */
+.footer.show {
+    bottom: 0;  /* Bring the footer into view */
+}
+/* Footer container */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+    .footer {
+      position: relative; /* Makes the footer part of normal flow */
+      bottom: 0; /* Overrides the hidden effect */
+      margin-top: 20px; /* Spacing from social icons */
+      background-color: #000000; /* Slight background for visibility */
+      padding: 20px 10px;
+      text-align: center;
+      z-index: 1; /* Ensure it's above background */
+    }
+  
+    .footer-content {
+      flex-direction: column; /* Stack links vertically */
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .footer-content p {
+      font-size: 13px;
+    }
+  }

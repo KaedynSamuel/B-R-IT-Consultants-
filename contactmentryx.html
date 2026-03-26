@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="contactmentryx.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Monoton&family=Permanent+Marker&display=swap" rel="stylesheet">
+ <link rel="icon" href="images/X trans.png" type="image/png">
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/Final Logo No Text.png" alt="BandR IT Consultants Logo" class="logo-img">
+                B&R IT Consultants
+            </a>
+        </div>
+  
+        <ul class="nav-links">
+          <li class="mobile-only">
+            <a href="MentryX.html" class="mobile-mobile-link">
+              <span class="mentry-text">Mentry</span><span class="big-x">X</span>
+            </a>
+          </li>
+      </ul>
+      
+        <!-- Separate Vertex Link on the right -->
+        <a href="MentryX.html" class="vertex-link">Mentry<span class="big-x">X</span></a>
+  
+  
+        <!-- Mobile toggle -->
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+  </nav>
+      
+  
+
+  <!-- 🔹 Banner Video Section (replacing the image header) -->
+  <section class="header-image">
+    <video class="contact-header-image" autoplay muted loop playsinline>
+      <source src="images/573270_Business_Stock_3840x2160.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="image-overlay">
+      <h1 class="header-text">Get In Touch With Us at MentryX</h1>
+      <p class="subheader-text">We'd love to hear from you and help you!</p>
+      <a href="#contact-container" class="message-us-btn">Message Us</a>
+    </div>
+  </section>
+
+
+  <section class="contact-section">
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you! Fill in the form below and we’ll get back to you soon.</p>
+    
+    <form id="contactForm" class="contact-form" action="https://formspree.io/f/xqallvjz" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="number">Phone Number</label>
+        <input type="tel" id="number" name="number" placeholder="Your phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your email address" required>
+      </div>
+      <div class="form-group">
+        <label for="course">Select Course</label>
+        <select id="course" name="course" required>
+          <option value="" disabled selected>Select a course</option>
+          <option value="Data Analysis">Data Analysis</option>
+          <option value="Data Engineering">Data Engineering</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Business Intelligence">Business Intelligence</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+
+    <!-- Thank-you message -->
+    <div id="thank-you" class="thank-you-popup" style="display:none;">
+      <p>🎉 Thank you! Your message has been sent successfully.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contactForm");
+  const thankYou = document.getElementById("thank-you");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.reset();
+        thankYou.style.display = "block";
+
+        setTimeout(() => {
+          thankYou.style.display = "none";
+        }, 5000); // Popup hides after 5 seconds
+      } else {
+        alert("There was a problem submitting your form. Please try again.");
+      }
+    } catch {
+      alert("Network error. Please try again.");
+    }
+  });
+</script>
+</section>
+
+
+
+<section class="contact-process-section">
+  <div class="container">
+    <h2>What to expect from MentryX</h2>
+    <p>
+      Once you submit your enquiry, our team will review your information carefully. 
+      We typically reach out within 24-48 hours via email or phone, depending on your preferred contact method.
+    </p>
+    <p>
+      Here’s a quick overview of the process you will undergo with us:
+    </p>
+    <ol>
+      <li><strong>Initial Contact:</strong> We get in touch to understand your needs and goals.</li>
+      <li><strong>Consultation:</strong> We schedule a call or meeting to discuss how we can help.</li>
+      <li><strong>Proposal:</strong> We provide a clear, detailed plan and timeline tailored for you.</li>
+      <li><strong>Implementation:</strong> Our team works closely with you to execute the agreed plan.</li>
+      <li><strong>Feedback & Support:</strong> We gather your feedback and provide ongoing assistance to ensure success.</li>
+    </ol>
+    <p>
+      We believe transparent communication and structured steps help to create the best outcomes for our mentees. 
+      If you have any questions during this process, feel free to reach out at any time!
+    </p>
+  </div>
+</section>
+  <script src="data.js"></script>
+</body>
+</html>

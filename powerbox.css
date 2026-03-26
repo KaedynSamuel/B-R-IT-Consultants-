@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 70px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* BANNER */
+.banner {
+  position: relative;
+  height: calc(70vh - 70px);
+  background: url("images/Image10.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.banner-content {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.banner h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.banner p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.banner button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  border: none;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+/* CONTAINER */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap; /* wraps nicely on small screens */
+  margin-top: 50px;
+}
+
+/* SMALL CUBE */
+.cube-card {
+  perspective: 800px;
+  width: 160px;
+  height: 160px;
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ROTATE ONLY TO 3RD FACE */
+.cube-card:hover .cube {
+  transform: rotateY(-180deg);
+}
+
+/* FACES */
+.face {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  backface-visibility: hidden;
+  font-size: 0.85rem;
+}
+
+/* FRONT (1st) */
+.face-front {
+  background: #000000;
+  transform: rotateY(0deg) translateZ(80px);
+  font-weight: bold;
+
+}
+
+/* SECOND (2nd) */
+.face-right {
+  background: #c00000;
+  color: #fff;
+  transform: rotateY(90deg) translateZ(80px);
+  border-radius: 10px;
+}
+
+/* FINAL (3rd) */
+.face-back {
+  background: #000000;
+  color: #fff;
+  transform: rotateY(180deg) translateZ(80px);
+}

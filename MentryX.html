@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MentryX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="images/X trans.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Monoton&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="MentryX.css" />
+</head>
+<body>
+    
+<div id="app">
+  <!-- Hexagonal Grid Section -->
+  <section class="hexagonal-section">
+    <canvas id="webgl-canvas"></canvas>
+    <div class="hero-text">
+      <h3>Mentry<span class="big-x">X</span><span class="tm">™</span></h3>
+      <h2>Program</h2>
+      <a href="index.html"><button id="start-btn">Home</button></a>
+      <a href="#mentorship-program"><button id="start-btn">Start Training</button></a>
+    </div>
+  </section>
+</div>
+  
+<section id="mentorship-program" class="program-section">
+  <div class="container">
+    <h2 class="section-title">Mentry<span class="big-x">X</span><span class="tm">™</span></h2>
+    <p class="intro-text">
+      “You’re not just buying a course with MentryX, you’re buying experience”
+    </p>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video-section" class="video-section">
+  <div class="video-container">
+    <video id="mentor-video" autoplay muted loop playsinline>
+      <source src="images/Mentryx2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<!-- PAYMENT MODAL -->
+<section>
+  <div id="payment-modal" class="payment-modal">
+    <div class="modal-content">
+      <h3>Confirm Payment</h3>
+      <p>Fill in your details to continue:</p>
+
+      <form id="paymentForm">
+        <div class="modal-form">
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+
+          <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+
+          <select name="referral" id="referral" onchange="toggleOtherReferral()" required>
+            <option value="">Where did you hear about us?</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Google Search">Google Search</option>
+            <option value="Word of Mouth">Word of Mouth</option>
+            <option value="Email Campaign">Email Campaign</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <input type="text" name="otherReferral" id="otherReferral" placeholder="Please specify" style="display: none;" />
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit">Yes, Proceed</button>
+          <button type="button" onclick="closePaymentPopup()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ JS CODE -->
+<script>
+  let selectedCourseName = "Beginner Data Analysis Course"; // default
+
+  function openPaymentForCourse(course) {
+    selectedCourseName = course;
+    showPaymentPopup();
+  }
+
+  function showPaymentPopup() {
+    document.getElementById("payment-modal").style.display = "flex";
+  }
+
+  function closePaymentPopup() {
+    document.getElementById("payment-modal").style.display = "none";
+  }
+
+  function toggleOtherReferral() {
+    const referralSelect = document.getElementById("referral");
+    const otherInput = document.getElementById("otherReferral");
+    if (referralSelect.value === "Other") {
+      otherInput.style.display = "block";
+      otherInput.required = true;
+    } else {
+      otherInput.style.display = "none";
+      otherInput.required = false;
+      otherInput.value = "";
+    }
+  }
+
+  const coursePrices = {
+    "Beginner Data Analysis Course": "2000.00",
+    "Intermediate Data Analysis Course": "3500.00",
+    "Advanced Data Analysis Course": "5000.00",
+    "Beginner Data Engineering Course": "2000.00",
+    "Intermediate Data Engineering Course": "3500.00",
+    "Advanced Data Engineering Course": "5000.00",
+    "Beginner Web Development Course": "2000.00",
+    "Intermediate Web Development Course": "3500.00",
+    "Advanced Web Development Course": "5000.00",
+    "Beginner Business Intelligence Course": "2000.00",
+    "Intermediate Business Intelligence Course": "3500.00",
+    "Advanced Business Intelligence Course": "5000.00"
+  };
+
+  // ✅ Save to backend + PayFast
+  document.getElementById("paymentForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const form = e.target;
+
+    const name = form.elements["name"].value.trim();
+    const phone = form.elements["phone"].value.trim();
+    const email = form.elements["email"].value.trim();
+    const gender = form.elements["gender"].value;
+    const referral = form.elements["referral"].value;
+    const otherReferral = form.elements["otherReferral"].value.trim();
+
+    if (!name || !phone || !email || !gender || !referral) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    if (referral === "Other" && !otherReferral) {
+      alert("Please specify your referral source.");
+      return;
+    }
+
+    const amount = coursePrices[selectedCourseName] || "2000.00";
+
+    const data = {
+      name,
+      phone,
+      email,
+      gender,
+      referral,
+      otherReferral,
+      course: selectedCourseName,
+      amount
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/payments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        // ✅ Redirect to PayFast after saving
+        const baseUrl = "https://www.payfast.co.za/eng/process";
+        const params = new URLSearchParams({
+          cmd: "_paynow",
+          receiver: "29850029",
+          amount: amount,
+          item_name: selectedCourseName,
+          return_url: "https://bandrit.com/thank-you.html",
+          cancel_url: "https://bandrit.com/payment-cancelled.html",
+          notify_url: "https://bandrit.com/ipn.php"
+        });
+        window.location.href = `${baseUrl}?${params.toString()}`;
+      } else {
+        alert("Error saving data. Try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+
+    <!-- ✅ Your TABS SECTION starts here -->
+    <section id="tabs-section" class="tabs-section">
+    <div class="tabs">
+      <button class="tab-button active" onclick="showTab('tab1')">Data Analysis</button>
+      <button class="tab-button" onclick="showTab('tab2')">Data Engineering</button>
+      <button class="tab-button" onclick="showTab('tab3')">Web Development</button>
+      <button class="tab-button" onclick="showTab('tab4')">Business Intelligence</button>
+    </div>
+    <!-- your tab panes go here -->
+  </section>
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <!-- Tab 1 Content (Data Analysis) -->
+        <div id="tab1" class="tab-pane active">
+            <div class="cards">
+                <!-- Data Analysis Beginner Course -->
+                <div class="card" id ="card-beginner-data-analysis">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Beginner Data Analysis</div>
+                        <p class="card-description">
+                            This plan outlines essential skills for aspiring data analysts,
+                            starting with foundational knowledge in tools like Excel and
+                            Power BI, alongside crucial soft skills. It progresses to
+                            core competencies in statistics, SQL for database management,
+                            and data visualization principles.
+                        </p>
+                        <p class="card-price">R1000 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Beginner Data Analysis -->
+                      <!-- Pay Now Redirect Form -->
+                  <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="2000.00">
+                            <input type="hidden" name="item_name" value="Beginner Data Analysis Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                          <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Beginner Data Analysis Course')">Pay now </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Data Analysis Intermediate Course -->
+                    <div class="card" id ="card-intermediate-data-analysis">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Intermediate Data Analysis</div>
+                        <p class="card-description">
+                            This plan outlines essential skills for aspiring data analysts,
+                            starting with foundational knowledge in tools like Excel and
+                            Power BI, along with key soft skills. It progresses to core
+                            data analytics competencies, including statistics, SQL for
+                            database management, and data visualization principles.
+                        </p>
+                        <p class="card-price">R1500 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Intermediate Data Analysis -->
+                        <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="3500.00">
+                            <input type="hidden" name="item_name" value="Intermediate Data Analysis Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                            <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Intermediate Data Analysis Course')">Pay now </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Data Analysis Advanced Course -->
+                   <div class="card" id ="card-advanced-data-analysis">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Advanced Data Analysis</div>
+                        <p class="card-description">
+                            Designed for experienced analysts, this course covers advanced
+                            topics like coding languages, data engineering, and SAP. It
+                            prepares learners for professional certification through 
+                            comprehensive, real-world-focused training. You'll gain
+                            the skills needed to tackle complex problems and advance in your data career.
+                        </p>
+                        <p class="card-price">R2000 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Advanced Data Analysis -->
+                        <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="5000.00">
+                            <input type="hidden" name="item_name" value="Advanced Data Analysis Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                           <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Advanced Data Analysis Course')">Pay now</button>
+
+<!-- Data Engineering -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2 Content (Data Engineering) -->
+        <div id="tab2" class="tab-pane">
+            <div class="cards">
+                <!-- Data Engineering Beginner Course -->
+            <div class="card" id="card-beginner-data-engineering">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Beginner Data Engineering</div>
+                        <p class="card-description">
+                            This beginner-level course focuses on learning programming
+                            languages like Python and Java, database management with 
+                            SQL and NoSQL systems, data warehousing solutions, ETL 
+                            processes, and cloud computing platforms. You will also
+                            learn how to design, build, and maintain data infrastructure.
+                        </p>
+                        <p class="card-price">R1000 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Beginner Data Engineering -->
+                        <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="2000.00">
+                            <input type="hidden" name="item_name" value="Beginner Data Engineering Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                        <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Beginner Data Engineering Course')">Pay now </button>
+
+                        
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Data Engineering Intermediate Course -->
+                <div class="card" id="card-intermediate-data-engineering">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Intermediate Data Engineering</div>
+                        <p class="card-description">
+                            This course builds on beginner knowledge, focusing on advanced Python/Scala,
+                            complex SQL/NoSQL databases, scalable data warehouses, and big data
+                            technologies like Hadoop and Spark. You'll also gain skills in 
+                            cloud-based engineering (AWS, Azure, Google Cloud) and 
+                            automation/infrastructure-as-code principles.
+                        </p>
+                        <p class="card-price">R1500 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Intermediate Data Engineering -->
+                        <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="3500.00">
+                            <input type="hidden" name="item_name" value="Intermediate Data Engineering Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                           <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Intermediate Data Engineering Course')">Pay now </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Data Engineering Advanced Course -->
+              <div class="card" id="card-advanced-data-engineering">
+                    <div class="card__content">
+                        <div class="card-icon"></div>
+                        <div class="card__title">Advanced Data Engineering</div>
+                        <p class="card-description">
+                            This program focuses on leading large-scale data projects, covering
+                            real-time streaming (Kafka/Flink), advanced automation, data governance,
+                            and high availability/disaster recovery. You'll learn about the 
+                            latest tools in the industry and design solutions to solve complex
+                            problems.
+                        </p>
+                        <p class="card-price">R2000 PM</p>
+                        <h5 class="course-duration">(Full six-month course)</h5>
+                        <!-- PayFast Payment Form for Advanced Data Engineering -->
+                        <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                            <input type="hidden" name="cmd" value="_paynow">
+                            <input type="hidden" name="receiver" value="29850029">
+                            <input type="hidden" name="amount" value="5000.00">
+                            <input type="hidden" name="item_name" value="Advanced Data Engineering Course">
+                            <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                            <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                            <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                            <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Advanced Data Engineering Course')">Pay now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Tab 3 Content (Web Development) -->
+<div id="tab3" class="tab-pane">
+    <div class="cards">
+        <!-- Web Development Beginner Course -->
+        <div class="card" id="card-beginner-web-development">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Beginner Web Development</div>
+                <p class="card-description">
+                    Learn the fundamentals of web development, including HTML to structure
+                    your content, CSS for styling, and JavaScript to add interactivity
+                    to your websites. This course is perfect for beginners looking 
+                    to build their first website and understand the core technologies
+                    of the web.
+                </p>
+                <p class="card-price">1000 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="2000.00">
+                    <input type="hidden" name="item_name" value="Beginner Web Development Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                    <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Beginner Web Development Course')">Pay now</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Web Development Intermediate Course -->
+        <div class="card" id="card-intermediate-web-development">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Intermediate Web Development</div>
+                <p class="card-description">
+                    Enhance your web development skills by mastering advanced JavaScript,
+                    front-end frameworks like React, and back-end development with 
+                    server-side languages and database integration. You’ll learn
+                    to build full-stack applications, improving your ability to
+                    create dynamic, robust websites and web services.
+                </p>
+                <p class="card-price">R1500 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="3500.00">
+                    <input type="hidden" name="item_name" value="Intermediate Web Development Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                    <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Intermediate Web Development Course')">Pay now </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Web Development Advanced Course -->
+    <div class="card" id="card-advanced-web-development">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Advanced Web Development</div>
+                <p class="card-description">
+                    Master large-scale web architectures, real-time communication
+                    with WebSockets, serverless computing, and microservices. 
+                    Focus on leadership skills, guiding teams, and staying ahead
+                    of trends like progressive web apps, GraphQL, and other cutting-edge
+                    technologies in web development.
+                </p>
+                <p class="card-price">R2000 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="5000.00">
+                    <input type="hidden" name="item_name" value="Advanced Web Development Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                    <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Advanced Web Development Course')">Pay now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab 4 Content (Business Intelligence) -->
+<div id="tab4" class="tab-pane">
+    <div class="cards">
+        <!-- Business Intelligence Beginner Course -->
+        <div class="card" id="card-beginner-business-intelligence">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Beginner Business Intelligence</div>
+                <p class="card-description">
+                    Build a foundation in data literacy, learning to gather, clean,
+                    and organize data using tools like Excel, Tableau, and Power 
+                    BI. You'll also develop a basic understanding of SQL and 
+                    business metrics for performance tracking and decision-
+                    making.
+                </p>
+                <p class="card-price">R1000 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="2000.00">
+                    <input type="hidden" name="item_name" value="Beginner Business Intelligence Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                    <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Beginner Business Intelligence Course')">Pay now</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Business Intelligence Intermediate Course -->
+        <div class="card" id="card-intermediate-business-intelligence">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Intermediate Business Intelligence</div>
+                <p class="card-description">
+                    Build on your skills by mastering advanced SQL queries, data modeling,
+                    and working with BI platforms like Tableau, Power BI, or Looker. 
+                    Learn to create interactive dashboards and apply statistical 
+                    analysis and data mining to uncover insights.
+                </p>
+                <p class="card-price">R1500 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="3500.00">
+                    <input type="hidden" name="item_name" value="Intermediate Business Intelligence Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                   <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Intermediate Business Intelligence Course')">Pay now </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Business Intelligence Advanced Course -->
+       <div class="card" id="card-advanced-business-intelligence">
+            <div class="card__content">
+                <div class="card-icon"></div>
+                <div class="card__title">Advanced Business Intelligence</div>
+                <p class="card-description">
+                    Master advanced BI techniques, including data governance, predictive
+                    modeling, and enterprise-wide BI solutions. Develop leadership
+                    skills to manage BI teams, define data strategies, and stay
+                    ahead of trends like AI-driven analytics and real-time BI.
+                </p>
+                <p class="card-price">R2000 PM</p>
+                <h5 class="course-duration">(Full six-month course)</h5>
+                <form name="PayFastPayNowForm" action="https://www.payfast.co.za/eng/process" method="post">
+                    <input type="hidden" name="cmd" value="_paynow">
+                    <input type="hidden" name="receiver" value="29850029"> <!-- Replace with your real Merchant ID -->
+                    <input type="hidden" name="amount" value="5000.00">
+                    <input type="hidden" name="item_name" value="Advanced Business Intelligence Course">
+                    <input type="hidden" name="return_url" value="https://bandrit.com/thank-you.html">
+                    <input type="hidden" name="cancel_url" value="https://bandrit.com/payment-cancelled.html">
+                    <input type="hidden" name="notify_url" value="https://bandrit.com/ipn.php">
+                   <button type="button" class="pay-now-btn" onclick="openPaymentForCourse('Advanced Business Intelligence Course')">Pay now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="quiz-wrapper">
+  <!-- Result container on the left -->
+  <div id="quiz-result">
+  
+  </div>
+
+  <!-- Quiz container on the right -->
+  <section id="mentorship-quiz">
+    <h2>Find Your Perfect Mentorship Track</h2>
+    <p>Answer a few quick questions to see which course fits you best.</p>
+    <p>
+      This quiz is designed to help you identify the mentorship track that aligns with your skills, interests, and experience level.
+      By understanding your strengths and goals, we can recommend the most suitable course to accelerate your learning journey.
+      Whether you're a beginner looking to start fresh or an experienced professional aiming to level up, this quiz will guide you to the right path.
+    </p>
+    <p>
+      Taking the time to complete this quiz ensures you get personalized guidance and make informed decisions about your mentorship and career growth.
+    </p>
+
+    <!-- Start & Restart Buttons -->
+    <button id="startQuiz">Start Quiz</button>
+    <button id="restartQuiz" style="display:none;">Restart Quiz</button>
+        <div id="quizContainer" style="display:none;"></div>
+      <div id="course-result"></div>
+    <div id="skill-level-result"></div>
+ 
+ </section>
+    <!-- Quiz Questions -->
+    <div id="quizContainer" style="display:none;"></div>
+    <div id="quiz-result-card-container"></div>
+      <div id="course-result"></div>
+    <div id="skill-level-result"></div>
+    
+ 
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("startQuiz");
+  const restartBtn = document.getElementById("restartQuiz");
+  const quizContainer = document.getElementById("quizContainer");
+  const courseResult = document.getElementById("course-result");
+  const skillResult = document.getElementById("skill-level-result");
+  const resultCardContainer = document.getElementById("quiz-result-card-container");
+
+  let scores = {
+    analysis: 0,
+    engineering: 0,
+    web: 0,
+    bi: 0
+  };
+
+  let selectedCourse = "";
+  let totalScore = 0;
+
+  const partAQuestions = [
+    {
+      text: "Which area of technology are you most passionate about?",
+      options: ["Data Analysis", "Data Engineering", "Web Development", "Business Intelligence"]
+    },
+    {
+      text: "Which tool or tech are you drawn to?",
+      options: ["Excel / Power BI", "Python / Java", "HTML / CSS / JS", "Tableau / SQL"]
+    },
+    {
+      text: "Which task do you enjoy most?",
+      options: ["Analyzing data", "Designing data systems", "Building UI", "Creating dashboards"]
+    },
+    {
+      text: "Which topic excites you for future learning?",
+      options: ["Stats / ML", "Big Data / Cloud", "Microservices / Frontend", "BI / Data Governance"]
+    },
+    {
+      text: "What kind of impact do you aspire to make?",
+      options: ["Insightful decisions", "Powerful data systems", "Great digital products", "Strategic dashboards"]
+    }
+  ];
+
+  const partBQuestions = [
+    "Experience with programming languages/tools?",
+    "Skills in BI tools (Excel, Power BI, Tableau)?",
+    "Problem-solving ability?",
+    "Experience designing systems/processes?",
+    "Ability to communicate technical info?"
+  ];
+
+  function clearQuiz() {
+    scores = { analysis: 0, engineering: 0, web: 0, bi: 0 };
+    totalScore = 0;
+    selectedCourse = "";
+    quizContainer.innerHTML = "";
+    courseResult.innerHTML = "";
+    skillResult.innerHTML = "";
+    resultCardContainer.innerHTML = "";
+    restartBtn.style.display = "none";
+    startBtn.style.display = "inline-block";
+    quizContainer.style.display = "none";
+  }
+
+  function startQuiz() {
+    clearQuiz();
+    startBtn.style.display = "none";
+    quizContainer.style.display = "block";
+    showPartAQuestion(0);
+  }
+
+  function showPartAQuestion(index) {
+    quizContainer.innerHTML = "";
+    const q = partAQuestions[index];
+    const questionDiv = document.createElement("div");
+    questionDiv.innerHTML = `<h3>Q${index + 1}: ${q.text}</h3>`;
+
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement("button");
+      btn.textContent = `${idx + 1}. ${opt}`;
+      btn.style.margin = "10px";
+      btn.onclick = () => {
+        if (idx === 0) scores.analysis += 5;
+        else if (idx === 1) scores.engineering += 5;
+        else if (idx === 2) scores.web += 5;
+        else if (idx === 3) scores.bi += 5;
+
+        if (index + 1 < partAQuestions.length) {
+          showPartAQuestion(index + 1);
+        } else {
+          showPartAResult();
+        }
+      };
+      questionDiv.appendChild(btn);
+    });
+
+    quizContainer.appendChild(questionDiv);
+  }
+
+  function showPartAResult() {
+    quizContainer.innerHTML = "";
+
+    // Determine top scoring course
+    const topTrack = Object.keys(scores).reduce((a, b) => (scores[a] > scores[b] ? a : b));
+
+    // Map for display & IDs
+    const courseMap = {
+      analysis: "Data Analysis",
+      engineering: "Data Engineering",
+      web: "Web Development",
+      bi: "Business Intelligence"
+    };
+    const idMap = {
+      analysis: "data-analysis",
+      engineering: "data-engineering",
+      web: "web-development",
+      bi: "business-intelligence"
+    };
+
+    selectedCourse = idMap[topTrack];
+    const recommendedCourse = courseMap[topTrack];
+courseResult.innerHTML = `<h2 class="color-flash" style="font-size:3rem; font-weight:bold;">Your Course : ${recommendedCourse}</h2>`;
+
+
+    const continueDiv = document.createElement("div");
+    continueDiv.innerHTML = `<p>Would you like to assess your current skill level?</p>`;
+
+    const yesBtn = document.createElement("button");
+    yesBtn.textContent = "Yes";
+    yesBtn.style.marginRight = "10px";
+    yesBtn.onclick = () => {
+      showPartBQuestion(0, 0);
+    };
+
+    const noBtn = document.createElement("button");
+    noBtn.textContent = "No";
+    noBtn.onclick = () => {
+      quizContainer.innerHTML = "<p>Thank you for completing the quiz!</p>";
+      restartBtn.style.display = "inline-block";
+    };
+
+    continueDiv.appendChild(yesBtn);
+    continueDiv.appendChild(noBtn);
+    quizContainer.appendChild(continueDiv);
+  }
+
+  function showPartBQuestion(index, currentScore) {
+    quizContainer.innerHTML = "";
+    const questionDiv = document.createElement("div");
+    questionDiv.innerHTML = `<h3>Part B - Q${index + 1}: ${partBQuestions[index]}</h3><p>Rate from 1 (low) to 5 (high)</p>`;
+
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.style.margin = "10px";
+      btn.onclick = () => {
+        const newScore = currentScore + i;
+        if (index + 1 < partBQuestions.length) {
+          showPartBQuestion(index + 1, newScore);
+        } else {
+          totalScore = newScore;
+          showFinalResult();
+        }
+      };
+      questionDiv.appendChild(btn);
+    }
+
+    quizContainer.appendChild(questionDiv);
+  }
+
+function showFinalResult() {
+  quizContainer.style.display = "none";
+  restartBtn.style.display = "inline-block";
+
+  let skillLevel = "";
+if (totalScore <= 10) skillLevel = "beginner";       // low scores 1–10
+else if (totalScore <= 18) skillLevel = "intermediate";  // mid 11–18
+else skillLevel = "advanced";                        // 19–25 high scores
+
+
+  // Clear the card container so no old cards remain
+  resultCardContainer.innerHTML = "";
+
+  // Update skill result text and add "Visit Course" button below
+  skillResult.innerHTML = `
+    <h3>You are at a <strong>${skillLevel.toUpperCase()}</strong> level in <strong>${selectedCourse.replace(/-/g, " ")}</strong>.</h3>
+  `;
+
+  const visitBtn = document.createElement("button");
+  visitBtn.textContent = "Visit Your Course";
+  visitBtn.style.marginTop = "10px";
+  visitBtn.style.padding = "10px 20px";
+  visitBtn.style.fontSize = "1rem";
+  visitBtn.style.cursor = "pointer";
+
+visitBtn.onclick = () => {
+  // Show the correct tab based on selectedCourse
+  const tabMap = {
+    "data-analysis": "tab1",
+    "data-engineering": "tab2",
+    "web-development": "tab3",
+    "business-intelligence": "tab4"
+  };
+  const tabId = tabMap[selectedCourse];
+  showTab(tabId);
+
+  // Wait for tab to render, then scroll
+  setTimeout(() => {
+    const cardId = `card-${skillLevel}-${selectedCourse}`;
+    const courseCard = document.getElementById(cardId);
+    if (courseCard) {
+      courseCard.scrollIntoView({ behavior: "smooth", block: "start" });
+// Remove class first if still active
+courseCard.classList.remove('flash-highlight');
+// Force reflow to restart animation
+void courseCard.offsetWidth;
+// Add the class again to start animation
+courseCard.classList.add('flash-highlight');
+
+// Remove the class after 10 seconds (animation duration)
+setTimeout(() => {
+  courseCard.classList.remove('flash-highlight');
+}, 5000);
+
+
+
+      // Flash highlight color
+      const originalBg = courseCard.style.backgroundColor;
+      courseCard.style.backgroundColor = "";
+      setTimeout(() => {
+        courseCard.style.backgroundColor = originalBg || "";
+      }, 2000);
+    } else {
+      alert("Course card not found.");
+    }
+  }, 300); // Delay of 300ms – you can adjust this if needed
+};
+
+
+
+  skillResult.appendChild(visitBtn);
+}
+
+  startBtn.addEventListener("click", startQuiz);
+  restartBtn.addEventListener("click", startQuiz);
+
+  clearQuiz(); // Start clean
+});
+</script>
+
+
+
+
+
+
+<section>
+  <div class = "help-section">
+    <div class ="help-content">
+      <h2>Need Help Choosing?</h2>
+      <p>
+        If you're unsure which course is right for you, our mentors are here to help!<br>
+        Click the button below to book a consultation and get personalized advice.
+      </p>
+      <button onclick="window.location.href='contactmentryx.html'">Book a Consultation</button>
+  </div>
+  <div class = "help-section2">
+<div class="help-more-section">
+  <h1>Exploring Your Skills and Growing in the Working World</h1>
+  <p>
+    At our core, we believe that developing your skills and investing in yourself should never be frowned upon — it’s the key to long-term success in any industry.
+    We are committed to ensuring our students receive the best possible guidance as they navigate their paths within the IT industry and beyond.
+    <br><br>
+    Through our mentorship, we focus on helping our mentees refine their skills, gain practical experience, and build the confidence they need to thrive in a competitive environment.
+    By providing tailored support, industry insights, and real-world advice, we empower you to become the best version of yourself — professionally and personally.
+    <br><br>
+    Whether you’re just starting out or looking to advance your career, our community is here to help you grow every step of the way.
+  </p>
+</div>
+
+  </div>
+</section>
+
+<div class="power-box-banner">
+  <!-- Bottom image -->
+  <img src="images/Grad.jpeg" alt="Bottom Image" class="bottom-image">
+
+  <!-- Top video for hover effect -->
+  <video autoplay muted loop class="top-video">
+    <source src="images/Help.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Title and button -->
+  <div class="banner-content">
+    <h1 class="banner-title">Power Box</h1>
+    <button class="banner-button" data-target="target-page.html">Visit Power Box</button>
+
+<!-- Full-screen overlay -->
+<div id="transitionOverlay">
+  <h1 id="powerBoxTitle">PowerBox</h1>
+</div>
+
+  </div>
+</div>  
+
+
+
+
+
+<section class="pyramid-process">
+  <h2>How Our Mentorship Program Works</h2>
+  <div class="pyramid">
+
+    <!-- Row 1 -->
+    <div class="row row-1">
+      <div class="mini-card">
+        <span class="card-heading">Step 1</span><br><strong>Course Selection</strong>
+        <div class="hover-box">
+          You'll begin by evaluating your current skills, qualifications, and career objectives. This self-assessment helps you recognize strengths and areas for development to choose a path aligned with your goals.
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="row row-2">
+      <div class="mini-card">
+        <span class="card-heading">Step 2</span><br><strong>Enrolment</strong>
+        <div class="hover-box">
+          Once you've identified the ideal course, secure your spot by selecting your course and completing checkout. You’ll receive confirmation for the next intake to officially start your journey.
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <span class="card-heading">Step 3</span><br><strong>Orientation</strong>
+        <div class="hover-box">
+          Attend a comprehensive orientation session covering course structure, objectives, and expectations. Meet fellow students and staff to foster a supportive community.
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="row row-3">
+      <div class="mini-card">
+        <span class="card-heading">Step 4</span><br><strong>Dev Plan</strong>
+        <div class="hover-box">
+          Have a one-on-one meeting with your mentor to develop a customized plan that aligns with your goals and learning style, ensuring a smooth start.
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <span class="card-heading">Step 5</span><br><strong>Mentorship</strong>
+        <div class="hover-box">
+          Your mentor will meet regularly to guide progress, assist with challenges, celebrate successes, and keep you on track to meet career goals.
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <span class="card-heading">Step 6</span><br><strong>CV & Interview</strong>
+        <div class="hover-box">
+          Attend a workshop with our lead mentor focused on refining your CV and preparing for job interviews, boosting your confidence to take the next career step.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+  <!-- 🔹 Footer -->
+<script>
+    function showTab(tabId) {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+  
+      // Remove active class from all tabs
+      tabButtons.forEach(button => button.classList.remove('active'));
+      tabPanes.forEach(pane => pane.classList.remove('active'));
+  
+      // Add active class to clicked tab
+      document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+  
+
+  <script type="module">
+    // Three.js for the Hexagonal Grid Background
+    
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js';
+    import Grid1Background from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.16/build/backgrounds/grid1.cdn.min.js';
+    
+    const bg = Grid1Background(document.getElementById('webgl-canvas'));
+    
+    // Your target colors for background transition
+    const colorHexes = ['#00ffd5', '#a800ce', '#00fffb', '#686de0'];
+    const colors = colorHexes.map(hex => new THREE.Color(hex));
+    
+    let currentIndex = 0;
+    let nextIndex = 1;
+    let lerpFactor = 0;
+    const transitionSpeed = 0.005; // adjust to make transitions slower/faster
+    
+    const currentColor = colors[currentIndex].clone();
+    const nextColor = colors[nextIndex].clone();
+    
+    function animate() {
+      requestAnimationFrame(animate);
+    
+      // Smoothly interpolate (lerp) from currentColor to nextColor
+      currentColor.lerpColors(colors[currentIndex], colors[nextIndex], lerpFactor);
+    
+      // Apply the interpolated color to the entire grid
+      const brightColor = currentColor.clone().lerp(new THREE.Color(1, 1, 1), 0.2); // Increase blend towards white for more brightness
+      const hex = brightColor.getHex();
+    
+      bg.grid.setColors([hex, hex, hex]);
+    
+      // Increase lerpFactor
+      lerpFactor += transitionSpeed;
+      if (lerpFactor >= 1) {
+        // Move to the next pair of colors
+        currentIndex = nextIndex;
+        nextIndex = (nextIndex + 1) % colors.length;
+        lerpFactor = 0;
+      }
+    }
+    
+    // Increase light intensities to make the grid brighter
+    bg.grid.light1.intensity = 1000; // Increased intensity of the first light
+    bg.grid.light2.intensity = 500;  // Increased intensity of the second light
+    
+    bg.grid.light1.color.set(0xffffff); // Pure white light for more brightness
+    bg.grid.light2.color.set(0xffffff); // Pure white light for more brightness
+    
+    animate();
+    </script>
+    
+
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+          <p>&copy; 2025 <a href="MentryX.html">MentryX</a>. All rights reserved.</p>
+          <p><a href="MentryXTs&Cs.html">Terms and Conditions</a></p>
+        </div>
+      </footer>
+      <section id="vision-mission" class="vision-mission-section">
+  <div class="container">
+    <h2>Vision and Mission</h2>
+    <div class="mission">
+      <h3>Vision</h3>
+      <p>
+        Our vision is to be South Africa’s number one mentorship program for youth and emerging professionals,
+        bridging the gap between education and real-world tech experience. We empower driven individuals to build
+        practical skills, gain industry-ready capabilities, and transform from graduates into confident, adaptable
+        professionals. By focusing on strengths, innovation, and cutting-edge Business Intelligence, we develop people
+        who are ready to compete, lead, and create a future where talent and opportunity connect seamlessly. With
+        MentryX, you’re not just learning — you’re building your professional future.
+      </p>
+    </div>
+    <div class="career-support">
+      <h3>Mission</h3>
+      <p>     Our vision is to be South Africa’s number one mentorship program for youth and emerging professionals,
+        bridging the gap between education and real-world tech experience. We empower driven individuals to build
+        practical skills, gain industry-ready capabilities, and transform from graduates into confident, adaptable
+        professionals. By focusing on strengths, innovation, and cutting-edge Business Intelligence, we develop people
+        who are ready to compete, lead, and create a future where talent and opportunity connect seamlessly. With
+        MentryX, you’re not just learning — you’re building your professional future.</p>
+    </div>
+  </div>
+      
+</section>
+ <script src="data.js"></script>
+  <script src="MentryX.js"></script>
+</body>
+</html>

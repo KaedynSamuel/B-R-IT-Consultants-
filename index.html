@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B&R IT Consultants</title>
+    <link rel="stylesheet" href="indexstyle.css"> <!-- Your main CSS file -->
+    <link rel="stylesheet" href="cookie.css">
+    <!-- Font Awesome CDN (recommended) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="images/br trans no text (1).png" type="image/png">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Monoton&family=Permanent+Marker&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+<!-- Navigation Bar -->
+ 
+<nav class="navbar">
+  <div class="navbar-container">
+      <!-- Logo -->
+      <div class="logo">
+          <a href="index.html">
+              <img src="images/Final Logo No Text.png" alt="BandR IT Consultants Logo" class="logo-img">
+              B&R IT Consultants
+          </a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About1.html">About</a></li>
+        <li><a href="Sevrices.html">Services</a></li>
+        <li><a href="Contacts..html">Contact</a></li>
+        <li class="mobile-only">
+          <a href="MentryX.html" class="mobile-mobile-link">
+            <span class="mentry-text">Mentry</span><span class="big-x">X</span>
+          </a>
+        </li>
+    </ul>
+    
+
+      <!-- Separate Vertex Link on the right -->
+      <a href="MentryX.html" class="vertex-link">Mentry<span class="big-x">X</span></a>
+
+
+      <!-- Mobile toggle -->
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </button>
+  </div>
+</nav>
+
+
+<!-- Make the side nav button hover effect -->
+<!-- Blume Power Program Pop-up -->
+<div class="blume-popup" id="blumePopup">
+  <button class="blume-close-btn" id="blumeCloseBtn">&times;</button>
+  <div class="blume-popup-inner">
+    <!-- Left side: text content -->
+    <div class="blume-popup-content">
+      <div class="blume-popup-header">Mentry<span class="big-x">X</span> Program</div>
+
+      <p> Join <strong>MentryX</strong>, a premier mentorship program crafted to propel your career in the tech industry. Whether you're a young adult or a career changer, <strong>MentryX</strong>
+         equips you with practical skills in data analytics, IT consulting, and business strategy—essential tools 
+         to thrive in the dynamic world of technology. 🚀 <br><br> Gain hands-on experience, tackle real-world projects, 
+         and connect with industry leaders. The tech industry is evolving rapidly, and with <strong>MentryX</strong>, you’ll be 
+         prepared to lead and make a meaningful impact. <br><br> You’re not just enrolling in a course with <strong>MentryX</strong>;
+          you’re investing in an invaluable experience 🎓. </p>
+    
+    
+    
+      <a href="MentryX.html" class="blume-popup-btn">Join Now</a>
+    </div>
+
+    <!-- Right side: image -->
+    <div class="blume-popup-image">
+      <img src="images/Mentor.jpg" alt="Vertex Program" />
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("blumePopup");
+    const closeBtn = document.getElementById("blumeCloseBtn");
+
+    // Check if the popup has already been shown
+    const popupSeen = localStorage.getItem("mentryxPopupSeen");
+
+    if (!popupSeen) {
+      popup.style.display = "block";
+    }
+
+    closeBtn.addEventListener("click", function () {
+      popup.style.display = "none";
+      localStorage.setItem("mentryxPopupSeen", "true"); // Mark as seen
+    });
+  });
+</script>
+
+
+<div class="arrows">
+    <button id="prev">&#10094;</button>
+    <button id="next">&#10095;</button>
+</div>
+<div class="overlay"></div>
+
+<!-- Carousel (Slider) Above the Welcome Section -->
+  
+<div class="carousel">
+    <div class="list">
+        <div class="item">
+            <img src="images/Image74.jpg" alt="Image 1">
+            <div class="content">
+                <div class="title">Business Intelligence &</div>
+                <div class="topic">IT Consulting</div>
+                <div class="des">
+                BI dashboard & reporting development (Power BI, Tableau, SSRS) 
+                Data visualization & storytelling for actionable Insights
+                KPI tracking & performance monitoring for business optimization
+                Self-service BI implementation to empower business users
+                </div>
+                <div class="buttons">
+                    <a href="IT Consultaning.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="images/Image58.jpg" alt="Image 2">
+            <div class="content">
+                <div class="title">Software development</div>
+                <div class="topic">& Web Development</div>
+                <div class="des">
+                  We specialize in creating custom websites and mobile apps tailored 
+                  to your business needs. Whether you're looking to establish an 
+                  online presence or develop a functional app, we provide reliable,
+                   user-friendly solutions to help your business grow
+                </div>
+                <div class="buttons">
+                    <a href="software.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="images/Image50.avif" alt="Image 3">
+            <div class="content">
+                <div class="title">Cloud Solutions</div>
+                <div class="topic">& Data Engineering</div>
+                <div class="des">
+                Data warehouse development & optimization (SQL, Azure, AWS, GCP) ETL pipeline design
+                & implementation for seamless data integration Data migration & transformation for 
+                legacy systems to cloud platforms Big data analytics & processing using Hadoop,
+                Hive and Redshift.
+                </div>
+                <div class="buttons">
+                    <a href="Cloud.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="images/Image56.jpg" alt="Image 4">
+            <div class="content">
+              <div class="title">IT Support &</div>
+          <div class="topic">Technical Assistance</div>
+          <div class="des">
+            Expert IT consulting to optimize infrastructure and ensure 
+            seamless operations. Tailored solutions for troubleshooting
+             and resolving complex issues. Proactive monitoring and maintenance 
+             to minimize downtime and maximize performance. Strategic guidance on
+              adopting new technologies for efficiency, innovation, and growth.
+              </div>
+
+                <div class="buttons">
+                    <a href="IT Support.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5th Item -->
+        <div class="item">
+            <img src="images/IMage53.jpg" alt="Image 5">
+            <div class="content">
+                <div class="title">Training, Upskilling &</div>
+                <div class="topic">Skill Development</div>
+                <div class="des">
+                Power BI, SQL and Data Analytics training for businesses and professionals
+                Hands-on workshops & mentorship programs for practical learning.  
+                </div>
+                <div class="buttons">
+                    <a href="MentryX.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6th Item -->
+        <div class="item">
+            <img src="images/Image50.jpg" alt="Image 6">
+            <div class="content">
+                <div class="title">Data Analytics</div>
+                <div class="topic">& Data Management</div>
+                <div class="des">
+                Delivers expert data analytics and management services, encompassing data pipelines, 
+                quality assurance, insightful analysis, and compelling visualizations, to 
+                empower data-driven decisions and provide a competitive advantage. 
+                </div>
+                <div class="buttons">
+                    <a href="Data.html"><button>SEE MORE</button></a>
+                    <a href="Contacts..html"><button>CONTACT</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+
+
+</div>
+   
+<section class="logo-loop-section">
+  <h2><span class="purple-text">Our</span> Clients</h2>
+
+  <div class="marquee">
+    <div class="marquee__inner">
+
+<!-- GROUP 1 -->
+<div class="marquee__group">
+
+  <a href="https://www.gec.co.za" target="_blank">
+    <img src="images/GECv23.png">
+  </a>
+
+  <a href="https://www.tymebank.co.za" target="_blank">
+    <img src="images/tyme-global-logo.png">
+  </a>
+
+  <img src="images/AltruCo.png"> <!-- ❌ Not clickable -->
+
+  <a href="https://www2.deloitte.com" target="_blank">
+    <img src="images/deloitte v2.png">
+  </a>
+
+  <a href="https://inbeat.agency" target="_blank">
+    <img src="images/inbeat.png">
+  </a>
+
+  <a href="https://www.tymebank.co.za" target="_blank">
+    <img src="images/tyme-global-logo.png">
+  </a>
+
+  <a href="https://www.pk.co.za" target="_blank">
+    <img src="images/pk.png">
+  </a>
+
+</div>
+
+<!-- GROUP 2 (CLONE) -->
+<div class="marquee__group">
+
+  <a href="https://www.gec.co.za" target="_blank">
+    <img src="images/GECv23.png">
+  </a>
+
+  <a href="https://www.tymebank.co.za" target="_blank">
+    <img src="images/tyme-global-logo.png">
+  </a>
+
+  <img src="images/AltruCo.png"> <!-- ❌ Not clickable -->
+
+  <a href="https://www2.deloitte.com" target="_blank">
+    <img src="images/deloitte v2.png">
+  </a>
+
+  <a href="https://inbeat.agency" target="_blank">
+    <img src="images/inbeat.png">
+  </a>
+
+  <a href="https://www.tymebank.co.za" target="_blank">
+    <img src="images/tyme-global-logo.png">
+  </a>
+
+  <a href="https://www.pk.co.za" target="_blank">
+    <img src="images/pk.png">
+  </a>
+
+</div>
+  </div>
+</section>
+
+
+<div class="bottom-black-box">
+    <div class="footer-info">
+      <h2>B&R IT Consultants</h2>
+      
+      <div class="about-contact-wrapper">
+        <!-- About Us Section -->
+        <div class="about-info">
+          <h3> Full TechTeam 🌐</h3>
+          <p>Our full tech team includes developers, designers, testers, and IT experts who collaborate to build and maintain effective digital solutions.</p>
+        </div>
+  
+        <!-- Contact Section -->
+        <div class="contact-info">
+          <h3>Contact</h3>
+          <p>Phone: +27 63 774 7927</p>
+        <p>Email: Info@bandrit.com</rayleenapadayachee></a></p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Centered buttons and headings -->
+    <div class="button-section">
+      <div class="button-item">
+
+      </div>
+      <div class="button-item">
+
+        <a href="Contacts..html" class="button">Get In Touch</a>
+      </div>
+    </div>
+  
+<!-- Social menu on the right side -->
+<div class="social-menu">
+  <ul>
+
+    <li><a href="https://www.instagram.com/mentry.x/profilecard/?igsh=MTRpMjBjZ3hxN3F5Yw%3D%3D" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    <li><a href="https://www.linkedin.com/company/b-and-r-it-consultants/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+    <li><a href="https://wa.me/+27637747927" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+    <li><a href="https://www.tiktok.com/@br.it.consultants" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+  </ul>
+</div>
+    
+  
+<footer class="footer" id="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <a href="index.html">B&R IT Consultants</a>. All rights reserved.</p>
+      <p><a href="T&C.html">Terms and Conditions</a></p>
+      <p><a href="Cookiepolicy.html">Cookie Policy</a></p>
+      <p><a href="Copyright.html">Copyright Policy</a></p>
+      <p><a href="Privacy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+<script src="data.js"></script> <!-- main JavaScript file -->
+</body>
+</html>

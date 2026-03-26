@@ -1,0 +1,1688 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Montserrat", serif;
+    color: #fff;
+
+}
+
+
+/* Hexagonal Grid Section */
+.hexagonal-section {
+    position: relative;
+    width: 100%;
+    height: 1000px; /* 30cm = 300px */
+    background: #000; /* Ensure the background is black or any color you'd like */
+    z-index: 0;
+}
+
+/* Hexagonal Grid Canvas Styling */
+#webgl-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Fill the parent section */
+    z-index: -1; /* Ensures the canvas stays behind the text */
+}
+.hero-text .tm {
+  font-family: "Montserrat", serif; 
+  font-size: 0.15em;          /* Small text */
+  display: inline-flex;       /* Flex to center */
+  align-items: center;        /* Vertically center */
+  justify-content: center;    /* Horizontally center */
+  width: 1.4em;               /* Circle width */
+  height: 1.4em;              /* Circle height */
+  border: 2px solid rgb(255, 255, 255); /* Circle border */
+  border-radius: 50%;         /* Make it round */
+  color: rgb(255, 255, 255);  /* ™ color */
+  font-weight: 600;
+  position: relative;
+  top: -6em;                /* Fine-tune up */
+  margin-left: 4px;           /* Space from X */
+  user-select: none;
+  line-height: 1;             /* Remove extra line spacing */
+}
+.section-title .tm {
+  font-family: "Montserrat", serif;
+  font-size: 0.15em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1.5px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  position: relative;
+  top: -7em; /* Fine-tune for section-title */
+  margin-left: 4px;
+  user-select: none;
+  line-height: 1;
+}
+
+
+/* Hero Text Styling */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1; /* Make sure the text and button are above the canvas */
+}
+@media (max-width: 400px) {
+  .hero-text .tm {
+    display: none;
+  }
+}
+
+/* Hero Text Heading Styling */
+.hero-text h3 {
+    font-size: 120px;
+    font-weight: 500;
+    color: rgb(110, 236, 255);
+    font-family: 'Monoton', cursive;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.hero-text .big-x {
+    font-size: 10rem;
+    color: rgb(253, 253, 253);
+}
+
+.hero-text h2 {
+    font-size: 100px;
+    font-weight: 500;
+    font-family: 'Monoton', cursive;
+    margin: 0;
+    padding: 0;
+    color: rgb(110, 236, 255);
+    text-transform: uppercase;
+    user-select: none;
+}
+/* Start Button Styling */
+button#start-btn {
+    font-family: "Montserrat", serif;
+    background: #000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px; /* Adds space between the text and button */
+    border: none; /* Ensure no border by default */
+}
+
+button#start-btn:hover {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000; /* Add border only on hover */
+}
+.vision-mission-section {
+  background-color: #ffffff;
+  padding: 50px 20px;
+  border-radius: 12px;
+  max-width: 1900px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  color: #222;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  margin-top:30px;
+}
+
+.vision-mission-section .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vision-mission-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.vision-mission-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.vision-mission-section p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+
+/* MentorX Section */
+.mentorX-section {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 60px 20px;
+    padding-bottom: 76px;
+}
+
+.mentorX-section h3 {
+    font-size: 50px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    font-family: 'Monoton', cursive;
+    padding: 0;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.mentorX-section h2 {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Monoton', cursive;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.mentorX-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+
+/* Mentorship Program */
+#mentorship-program {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 40px 20px;
+    margin-bottom: 0;       /* ✨ Added */
+}
+
+#mentorship-program .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 0;      /* ✨ Added */
+}
+
+#mentorship-program .section-title {
+    font-size: 100px;
+    font-weight: 500;
+    font-family: 'Monoton', cursive;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+#mentorship-program .big-x {
+    font-size: 9rem;
+    color: rgb(110, 236, 255);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.program-structure h3,
+.additional-features h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.structure-list {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.structure-list li {
+    margin-bottom: 15px;
+}
+
+.structure-list li strong {
+    font-weight: bold;
+}
+
+.additional-features ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.additional-features ul li {
+    margin-bottom: 15px;
+}
+
+.additional-features ul li strong {
+    font-weight: bold;
+}
+
+/* Tabs Section */
+#tabs-section {
+    background-color: white;
+    margin-top: 0;        /* ✨ Added */
+    padding-top: 0;       /* ✨ Added */
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    color: #000;
+}
+
+/* Tab Button */
+.tab-button {
+    background-color: white;
+    border: 2px solid #000;
+    color: #000;
+    padding: 20px 40px;
+    font-size: 20px;
+    margin: 0 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.tab-button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.tab-button.active {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+/* Tab Content */
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.tab-pane {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 80px 5%;
+    flex-wrap: wrap;
+}
+
+.card {
+    min-height: 680px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    flex: 1 1 250px;
+    max-width: 280px;
+    margin: 20px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+/* Start Button Styling */
+button#start-btn {
+    font-family: "Montserrat", serif;
+    background: #000;
+    color: #fff;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px; /* Adds space between the text and button */
+    border: none; /* Ensure no border by default */
+}
+
+button#start-btn:hover {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000; /* Add border only on hover */
+}
+
+
+.card__content {
+    padding: 25px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000000;
+}
+
+.card__title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: px;
+    color: #000;
+}
+
+.card-price {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #00ffd5, #a800ce);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Ensures that it stays on the same line */
+    vertical-align: middle; /* Ensures that prices align in the same row, vertically centered */
+}
+
+.card-description {
+    text-align: left; /* Aligns text to the left side */
+    line-height: 1.8; /* Adds space between lines */
+    margin-top: 15px;
+    padding: 0 5px;
+    width: 100%; /* Makes sure it uses full width */
+}
+
+
+.card-description ul {
+    padding-left: 20px; /* Indent bullet points */
+    margin: 0;
+}
+
+.card-description li {
+    margin-bottom: 10px; /* Adds space between list items */
+}
+
+
+.learn-more-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 40px;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    background-color: #00fc22;
+}
+/* General Styling */
+  
+#video-section {
+    padding: 0;
+    margin: 0;
+    background-color: #000;
+  }
+  
+  .video-container {
+    height: 80vh; /* or any fixed height like 400px */
+    overflow: hidden;
+  }
+  
+  .video-container video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+/* Price inside the card with gradient text */
+.card-price {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #00ffd5, #a800ce);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .course-duration {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #999; /* A softer tone, you can tweak this */
+    margin-top: -10px; /* Optional: pulls it closer to the price */
+  }
+.pyramid-process {
+  padding: 2rem 1rem;
+  background: #ffffff;
+  color: #000000;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Pyramid rows */
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* Card styles */
+.mini-card {
+  position: relative;
+  background: #000000;
+  color: #00fffb;
+  padding: 4rem 4rem;
+  min-width: 120px;
+  max-width: 140px;
+  font-size: 1.8rem;
+  font-weight:bold;
+  line-height: 1.2;
+  border-radius: 8px;
+  z-index: 1;
+  overflow: visible;
+  border: 1px solid #00f7ff;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+.mini-card strong {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+.card-heading {
+  display: inline-block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 1.2;
+  background-image: linear-gradient(90deg, #00f7ff, #c800ff, #00f7ff);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: moveGradient 3s linear infinite;
+  transition: transform 0.3s ease;
+}
+@keyframes moveGradient {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Hover scale */
+.mini-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.hover-box {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+  padding: 1rem 1.2rem;
+  margin-top: 0.5rem;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+
+  /* Make sure no border or outline on the main box */
+  border: none;
+}
+
+/* Create the animated gradient border */
+.hover-box::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 15px;
+  background: linear-gradient(270deg, #00f7ff, #3ad53a, #b700ff);
+  background-size: 600% 600%;
+  animation: flowBorder 4s linear infinite;
+  z-index: -1;
+}
+
+/* Prevent the background of hover box from showing through the border */
+.hover-box::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: #2a2a2a;
+  border-radius: 9px;
+  z-index: -1;
+}
+
+@keyframes flowBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Show hover box on card hover */
+.mini-card:hover .hover-box {
+  opacity: 1;
+  transform: translateX(-50%) translateY(5px);
+  pointer-events: auto;
+}
+
+/* Blur others in same row */
+.row:hover .mini-card {
+  filter: blur(3px);
+  opacity: 0.4;
+}
+
+.row .mini-card:hover {
+  filter: none;
+  opacity: 1;
+  z-index: 5;
+}
+
+
+footer {
+    position: fixed;
+    bottom: -100px;  /* Initially hidden below the viewport */
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 20px;
+    transition: bottom 0.3s ease;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  /* Center the content horizontally */
+    gap: 30px;  /* Space between items */
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+.footer-content a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;  /* Underline links on hover */
+}
+
+/* Make footer visible when scrolled to the bottom */
+.footer.show {
+    bottom: 0;  /* Bring the footer into view */
+}
+/* Mobile Styling */
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    /* Adjust Hero Text */
+    .hero-text h3 {
+        font-size: 60px; /* Smaller font size for mobile */
+    }
+
+    .hero-text .big-x {
+        font-size: 6rem; /* Smaller 'X' font size for mobile */
+    }
+
+    .hero-text h2 {
+        font-size: 40px; /* Smaller font size for mobile */
+    }
+
+    /* Adjust Button Sizes */
+    button#start-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    /* Adjust Section Layout */
+    .hexagonal-section {
+        height: 900px; /* Reduce height for mobile */
+    }
+
+    /* Adjust Hero Text Position */
+    .hero-text {
+        top: 40%; /* Move the text and buttons up */
+    }
+}
+
+
+
+/* Tab Button (Mobile) */
+@media (max-width: 768px) {
+    .tabs {
+        display: flex;
+        flex-wrap: wrap; /* Allow buttons to wrap to the next row */
+        justify-content: center; /* Center the buttons */
+    }
+
+    .tab-button {
+        padding: 10px 20px; /* Further reduce padding for mobile */
+        font-size: 14px; /* Make font even smaller */
+        margin: 5px; /* Space between buttons */
+        flex: 1 1 calc(50% - 10px); /* Ensure two buttons per row */
+        max-width: calc(50% - 10px); /* Max width for two buttons in a row */
+    }
+
+    .tab-button.active {
+        background-color: black;
+        color: white;
+        border-color: white;
+    }
+}
+
+
+/* Cards Section (Mobile) */
+@media (max-width: 768px) {
+    .cards {
+        padding: 30px 5%; /* Adjust padding for mobile */
+        gap: 20px; /* Smaller gap between cards */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center; /* Center the cards */
+    }
+
+    /* First row with 2 cards */
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 50% width with gap */
+        max-width: calc(50% - 20px); /* Ensure cards do not exceed 50% width */
+        min-width: 280px; /* Ensure cards are not too small */
+    }
+
+    /* Second row with 1 centered card */
+    .cards .card:nth-child(3) {
+        flex: 1 1 100%; /* This makes the third card take 100% of the row */
+        max-width: 100%; /* Ensure the card doesn't exceed the container */
+        min-width: 280px; /* Ensure card is not too small */
+        margin-top: 20px; /* Adds space above the third card */
+    }
+
+    .card__title {
+        font-size: 1.2rem; /* Smaller title font */
+    }
+
+    .card-description {
+        font-size: 1rem; /* Adjust description text */
+        padding: 0 10px; /* Add some padding */
+    }
+
+    .card-price {
+        font-size: 1.5rem; /* Adjust price font size for mobile */
+    }
+
+    .learn-more-btn {
+        padding: 8px 20px; /* Adjust button padding */
+        font-size: 12px; /* Smaller font size for mobile */
+    }
+}
+
+
+/* Base Styles */
+#video-section {
+    padding: 0;
+    margin: 0;
+    background-color: #000;
+}
+
+.video-container {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.video-container video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Default: crop to fill */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .video-container {
+        height: auto; /* Let it size naturally */
+    }
+
+    .video-container video {
+        object-fit: contain; /* Show entire video without cropping */
+        height: auto;
+        width: 100%;
+    }
+}
+
+
+/* Process Section */
+@media (max-width: 768px) {
+    .process-section {
+        text-align: left;  /* Align content to the left */
+        padding-left: 0;  /* Remove or reduce padding to push content further left */
+    }
+
+    .process-section h2 {
+        font-size: 1.8rem;  /* Smaller heading size */
+        margin-left: 10px;  /* Adjust margin slightly to the right */
+    }
+
+    .process-step h3 {
+        font-size: 1.2rem;  /* Smaller step heading */
+        margin-left: 10px;  /* Adjust margin slightly to the right */
+    }
+
+    .process-section p,
+    .process-step p {
+        font-size: 1rem;  /* Smaller paragraph text for better readability */
+        margin-left: 10px;  /* Adjust margin slightly to the right */
+    }
+}
+
+
+
+/* Alternatively, if you just want to prevent horizontal scrolling on mobile: */
+@media (max-width: 768px) {
+    body, html {
+        overflow-x: hidden; /* Prevent horizontal scrollbar */
+    }
+}
+@media (max-width: 768px) {
+    .footer {
+      position: relative; /* Makes the footer part of normal flow */
+      bottom: 20; /* Overrides the hidden effect */
+      margin-top: 20px; /* Spacing from social icons */
+      background-color: #000000; /* Slight background for visibility */
+      padding: 20px 10px;
+      text-align: center;
+      z-index: 1; /* Ensure it's above background */
+    }
+  
+    .footer-content {
+      flex-direction: column; /* Stack links vertically */
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .footer-content p {
+      font-size: 13px;
+    }
+  }
+  @media (max-width: 768px) {
+    #mentorship-program .section-title {
+      font-size: 2.7rem;
+    }
+  
+    #mentorship-program .big-x {
+      font-size: 4rem;
+    }
+  
+    .intro-text,
+    .structure-list,
+    .additional-features ul {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  
+    .program-structure h3,
+    .additional-features h3 {
+      font-size: 1.4rem;
+    }
+  
+    .structure-list li,
+    .additional-features ul li {
+      margin-bottom: 12px;
+    }
+  
+}
+
+.angled-section {
+  position: relative;
+  height: 600px;
+  display: flex;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.text-side {
+  width: 65%; /* Increased for more room */
+  background: rgba(50, 50, 50, 0.85);
+  clip-path: polygon(0 0, 85% 0, 60% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* move text left */
+  padding: 2rem 3rem;
+  z-index: 2;
+  color: white;
+  transition: all 0.8s ease-in-out;
+}
+
+.image-side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.text-content {
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
+}
+
+
+.text-content {
+  padding-top: 0.5rem; /* reduce top padding to move content up */
+}
+
+.text-content h2 {
+  font-size: 3rem;
+  margin-top: 0;      /* remove default top margin */
+  margin-bottom: 1rem;
+  position: relative;
+  top: -10px;         /* nudge title up by 10 pixels */
+}
+
+
+#quiz-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* horizontally center all children */
+  max-width: 1200px;    /* max width for the whole wrapper - adjust as needed */
+  margin: 50px auto;
+  gap: 20px;
+  padding: 0 20px;      /* some horizontal padding for smaller screens */
+  box-sizing: border-box;
+}
+
+#mentorship-quiz {
+  width: 100%;          /* take full width of the wrapper */
+  max-width: 3000px;    /* max width of quiz container */
+  background: #000;
+  padding: 30px;
+  border-radius: 10px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+
+/* Result card container below quiz */
+#quiz-result-card-container {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+#skill-level-result button {
+  position: relative;
+  background: linear-gradient(135deg, #00f2ff, #6a00ff);
+  border: 2px solid white; /* ✅ White border added */
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s ease;
+  margin-top: 15px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#skill-level-result button::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(270deg, #00f2ff, #6a00ff, #00f2ff);
+  background-size: 600% 600%;
+  border-radius: 50px;
+  z-index: -1;
+  animation: animate-border 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#skill-level-result button:hover::before {
+  opacity: 1;
+}
+
+#skill-level-result button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+}
+
+@keyframes animate-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.card:hover {
+  /* your hover styles */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Ensure the pseudo-element is always behind */
+.flash-highlight::before {
+  pointer-events: none; /* prevents interfering with hover/click */
+}
+
+.flash-highlight {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  color: white;
+  background: #ffffff; /* fallback background */
+  animation: fillUp 10s ease-in-out forwards; /* Animation runs automatically */
+}
+
+.flash-highlight::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(45deg, #00ffd5, #a800ce, #00fffb, #00ffbb, #00ff00);
+  background-size: 500% 500%;
+  animation: fillUp 10s ease-in-out forwards;
+  z-index: -1;
+  border-radius: 12px;
+}
+
+
+@keyframes fillUp {
+  0% {
+    height: 0;
+    background-position: 0% 50%;
+    opacity: 1;
+  }
+  40% {
+    height: 100%;
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+  90% {
+    height: 100%;
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+
+
+
+/* Buttons inside quiz container */
+#quizContainer button {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: 2px solid #fff;
+  padding: 12px 44px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for all quizContainer buttons */
+#quizContainer button:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
+}
+
+/* Special class for "Visit Course" button */
+#quizContainer button.visit-course-btn {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 0; /* Align left inside container */
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for visit-course-btn */
+#quizContainer button.visit-course-btn:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+/* Pay button styling inside cards if any */
+#quiz-result .card .pay-button {
+  margin-top: 10px;
+  position: relative;
+  top: -10px;
+}
+
+/* Heading in quiz */
+#mentorship-quiz h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* Start and Restart Quiz buttons styling */
+#startQuiz, #restartQuiz {
+  background: black;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  margin: 5px 5px 20px 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#startQuiz:hover, #restartQuiz:hover {
+  background: white;
+  color: black;
+  border-color: black;
+}
+
+/* Container for quiz questions */
+#quizContainer {
+  margin-top: 20px;
+}
+
+/* Each question block */
+.question {
+  margin: 30px 0;
+  text-align: center;
+}
+
+/* Container holding options horizontally */
+.options-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+/* Circle styled radio options */
+.circle-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Hide native radio buttons */
+.circle-option input[type="radio"] {
+  display: none;
+}
+
+/* Circle base style */
+.circle-option .circle {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect on circle */
+.circle-option .circle:hover {
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+/* Checked circle styling with animated border */
+.circle-option input[type="radio"]:checked + .circle {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  transform: scale(1.1);
+  animation: borderColorFlow 3s linear infinite;
+}
+
+/* Border color animation keyframes */
+@keyframes borderColorFlow {
+  0% { border-color: rgb(0, 255, 221); }
+  25% { border-color: rgb(0, 200, 255); }
+  50% { border-color: rgb(255, 0, 221); }
+  75% { border-color: rgb(221, 255, 0); }
+  100% { border-color: rgb(0, 255, 221); }
+}
+
+/* Styling quiz next buttons */
+#quizContainer .quiz-next-btn {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 44px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+#quizContainer .quiz-next-btn:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+/* Questions text */
+#quizContainer .question p {
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  margin-top: 80px;
+}
+
+
+.help-content {
+  font-size: 1.5rem;
+  color: #000000;
+  margin-top: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.help-content button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding:20px 40px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+}
+.help-content button:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 24px;      /* Rounded corners */
+  border: 3px solid #000;  /* Black border */
+}
+.help-more-section{
+   padding: 50px 20px;
+    background-color: #fff;
+    color: #232323;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;  /* Add a max-width for the whole section */
+    margin: 0 auto; /* Center align the section */
+    font-size:1rem;
+  
+}
+
+.help-more-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #000;
+    font-weight: 600;
+} 
+@media (max-width: 600px) {
+  .help-content {
+    font-size: 1.2rem;      /* Slightly smaller text on mobile */
+    margin-top: 15px;
+    padding: 0 10px;        /* Add horizontal padding */
+  }
+
+  .help-content button {
+    padding: 15px 30px;     /* Smaller button padding */
+    font-size: 0.9rem;      /* Slightly smaller button text */
+  }
+
+  .help-more-section {
+    padding: 30px 15px;     /* Reduced padding */
+    font-size: 0.9rem;      /* Slightly smaller text */
+    max-width: 100%; 
+    margin-left: -15px;       /* Full width on mobile */
+  }
+
+  .help-more-section h2 {
+    font-size: 0.33rem;      /* Smaller heading */
+    margin-bottom: 20px;
+
+  }
+}
+
+
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.payment-modal .modal-content {
+  background: #111;
+  color: #f5f5f5;
+  padding: 5px 60px; /* Increased padding */
+  border-radius: 20px;
+  text-align: center;
+  width: 95%;
+  max-width: 500px; /* Larger width */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.payment-modal .modal-content h3 {
+  margin-bottom: 18px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.payment-modal .modal-content p {
+  font-size: 1.05rem;
+  color: #ccc;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* More spacing between fields */
+  margin-bottom: 35px;
+}
+
+.modal-form input,
+.modal-form select {
+  padding: 14px 18px; /* More padding inside fields */
+  border-radius: 10px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modal-form input::placeholder {
+  color: #aaa;
+}
+@keyframes borderFlow {
+  0% {
+    border-color: rgb(200, 0, 255);
+  }
+  25% {
+    border-color: rgb(0, 239, 36);
+  }
+  50% {
+    border-color: rgb(0, 255, 21);
+  }
+  75% {
+    border-color: rgb(0, 181, 231);
+  }
+  100% {
+    border-color: rgb(255, 0, 251);
+  }
+}
+
+.modal-form input:focus,
+.modal-form select:focus {
+  outline: none;
+  border: 2px solid;
+  animation: borderFlow 3s linear infinite;
+}
+
+
+.modal-form select:invalid {
+  color: #777;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 14px;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 1rem;
+  border: 2px solid #fff;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  background-color: white;
+  color: black;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
+}
+
+.pay-now-btn {
+  display: inline-block;
+  padding: 14px 48px;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  font-weight: bold;
+  border-radius: 30px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pay-now-btn:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.05);
+  border: 2px solid black;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+#otherReferral {
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 768px) {
+  .payment-modal .modal-content {
+    width: 90%; /* Adjust width for smaller screens */
+    padding: 30px; /* Reduce padding */
+  }
+
+  .payment-modal .modal-content h3 {
+    font-size: 1.5rem; /* Smaller heading size */
+  }
+
+  .payment-modal .modal-content p {
+    font-size: 0.9rem; /* Smaller paragraph text */
+  }
+
+  .modal-form input,
+  .modal-form select {
+    padding: 10px; /* Smaller padding for inputs */
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  .modal-buttons button {
+    padding: 10px; /* Smaller button padding */
+    font-size: 0.9rem; /* Smaller button text */
+  }
+}
+
+@media(max-width: 768){
+.mentorship-quiz {
+    padding: 20px; /* Reduce padding for smaller screens */
+    margin-top: 0; /* Reset margin-top */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    margin-left: 40px
+  }
+
+  #quiz-wrapper {
+    flex-direction: column; /* Stack quiz and result vertically */
+    align-items: center; /* Center align items */
+  }
+
+  #quiz-result {
+    margin-top: 20px; /* Add space between quiz and result */
+    width: 100%; /* Full width for result */
+  }
+}
+
+.power-box-banner {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* adjust height */
+  overflow: hidden;
+}
+
+/* Bottom image */
+.bottom-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Top video */
+.top-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  clip-path: circle(0px at 0 0); /* start hidden */
+  transition: clip-path 0.05s;
+  z-index: 2;
+}
+
+/* Banner content */
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 3; /* above video & image */
+}
+
+.banner-title {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  
+  /* Gradient text */
+  background: linear-gradient(270deg, #00e1ff, #a800ce, #00fff2, #686de0);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  /* Animate gradient */
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Keyframes for animated gradient */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.banner-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #000000;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.banner-button:hover {
+  background: rgba(0, 255, 251, 0.5);
+  transform: scale(1.1);
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Full-screen overlay hidden by default */
+#transitionOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #00e1ff, #a800ce, #00fff2, #686de0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1);
+}
+
+/* Show overlay */
+#transitionOverlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* PowerBox text animation */
+#powerBoxTitle {
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
+  transform: scale(0);
+}
+
+#transitionOverlay.animate-title #powerBoxTitle {
+  animation: popZoom 1.5s forwards;
+}
+
+@keyframes popZoom {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Full-screen zoom effect */
+#transitionOverlay.zoom-out {
+  animation: zoomScreen 1s forwards;
+}
+
+@keyframes zoomScreen {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(50); opacity: 0; }
+}
